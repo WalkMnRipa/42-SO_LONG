@@ -6,70 +6,52 @@
 #    By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/28 23:47:56 by jcohen            #+#    #+#              #
-#    Updated: 2024/07/12 17:28:55 by jcohen           ###   ########.fr        #
+#    Updated: 2024/07/13 18:51:55 by jcohen           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME := so_long
+NAME = so_long
 
-# Compilateur et flags
-CC := cc
-CFLAGS := -Wall -Wextra -Werror
+SRC_DIR = src
 
-# Chemins
-SRC_DIR = game
-GRAPH_DIR = graphique
-INC_DIR = includes
-LIBFT_DIR = libft
-MLX_DIR = minilibx-linux
+CC = cc
+CFLAGS = -Wall -Wextra -Werror
+MLXFLAGS = -lmlx -lXext -lX11 -lm
 
-# Sources
-SRC = $(wildcard $(SRC_DIR)/*.c)
-GRAPH = $(wildcard $(GRAPH_DIR)/*.c)
-OBJ = $(SRC:.c=.o) $(GRAPH:.c=.o)
+SRCS = $(SRC_DIR)/main.c $(SRC_DIR)/map.c $(SRC_DIR)/init.c \
+	   $(SRC_DIR)/game_logic.c $(SRC_DIR)/render.c \
+	   $(SRC_DIR)/clean.c 
 
-# Bibliothèques
-LIBFT := $(LIBFT_DIR)/libft.a
-MLX := $(MLX_DIR)/libmlx.a
+OBJS_DIR = objs
+OBJS = $(SRCS:%.c=$(OBJS_DIR)/%.o)
 
-# Flags pour les bibliothèques
-LIBS := -L$(LIBFT_DIR) -lft -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
+LIBFT = libft/libft.a
+MLX = minilibx-linux/libmlx.a
 
-# Inclusions
-INC := -I$(INC_DIR) -I$(LIBFT_DIR) -I$(MLX_DIR)
-
-# Règle par défaut
 all: $(NAME)
 
-# Compilation du programme
-$(NAME): $(OBJ) $(LIBFT) $(MLX)
-	$(CC) $(CFLAGS) $(OBJ) $(LIBS) -o $(NAME)
+$(NAME): $(OBJS) $(LIBFT) $(MLX)
+	$(CC) $(CFLAGS) $(OBJS) -L./libft -lft -L./minilibx-linux $(MLXFLAGS) -o $(NAME)
 
-# Compilation des objets
-%.o: %.c
-	$(CC) $(CFLAGS) $(INC) -c $< -o $@
+$(OBJS_DIR)/%.o: %.c
+	@mkdir -p $(@D)
+	$(CC) $(CFLAGS) -I./includes -I./libft -I./minilibx-linux -c $< -o $@
 
-# Compilation de la libft
 $(LIBFT):
-	make -C $(LIBFT_DIR)
+	make -C libft
 
-# Compilation de la MiniLibX
 $(MLX):
-	make -C $(MLX_DIR)
+	make -C minilibx-linux
 
-# Nettoyage
 clean:
-	rm -f $(OBJ)
-	make -C $(LIBFT_DIR) clean
-	make -C $(MLX_DIR) clean
+	make -C libft clean
+	make -C minilibx-linux clean
+	rm -rf $(OBJS_DIR)
 
-# Nettoyage complet
 fclean: clean
+	make -C libft fclean
 	rm -f $(NAME)
-	make -C $(LIBFT_DIR) fclean
 
-# Recompilation
 re: fclean all
 
-# Règles spéciales
 .PHONY: all clean fclean re
