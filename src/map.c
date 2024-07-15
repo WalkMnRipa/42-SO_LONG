@@ -6,11 +6,11 @@
 /*   By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 18:08:45 by jcohen            #+#    #+#             */
-/*   Updated: 2024/07/13 19:46:51 by jcohen           ###   ########.fr       */
+/*   Updated: 2024/07/13 22:56:26 by jcohen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../includes/so_long.h"
 
 static int	count_rows(char *filename)
 {
@@ -90,63 +90,55 @@ void	ft_print_map(t_game *game)
 
 int	validate_map(t_game *game)
 {
-	int	i;
-	int	j;
-	int	player;
-	int	exit;
-	int	collectibles;
-	int	first_row_length;
+	int		first_row_length;
+	char	current;
 
-	i = 0, j = 0;
-	player = 0, exit = 0, collectibles = 0;
-	// Vérifier si la carte est rectangulaire
+	int i, j, player, exit, collectibles;
+	i = 0;
+	player = 0;
+	exit = 0;
+	collectibles = 0;
 	first_row_length = ft_strlen(game->map.map[0]);
 	while (i < game->map.rows)
 	{
 		if ((int)ft_strlen(game->map.map[i]) != first_row_length)
 		{
-			ft_printf("Error: Map is not rectangular\n");
+			ft_printf("Error: Map is not rectangular (row %d)\n", i + 1);
 			return (0);
 		}
-		i++;
-	}
-	i = 0;
-	while (i < game->map.rows)
-	{
 		j = 0;
 		while (j < game->map.columns)
 		{
-			// Vérifier les murs
+			current = game->map.map[i][j];
 			if (i == 0 || i == game->map.rows - 1 || j == 0
 				|| j == game->map.columns - 1)
 			{
-				if (game->map.map[i][j] != WALL)
+				if (current != WALL)
 				{
-					ft_printf("Error: Map is not surrounded by walls\n");
+					ft_printf("Error: Map not by walls at (%d,% d)\n ", i, j);
 					return (0);
 				}
 			}
-			// Compter les éléments
-			if (game->map.map[i][j] == PLAYER)
+			if (current == PLAYER)
 			{
 				player++;
 				game->map.player.x = j;
 				game->map.player.y = i;
 			}
-			else if (game->map.map[i][j] == EXIT)
+			else if (current == EXIT)
 			{
 				exit++;
 				game->map.exit.x = j;
 				game->map.exit.y = i;
 			}
-			else if (game->map.map[i][j] == COLLECTIBLE)
+			else if (current == COLLECTIBLE)
 			{
 				collectibles++;
 			}
-			else if (game->map.map[i][j] != FLOOR
-				&& game->map.map[i][j] != WALL)
+			else if (current != FLOOR && current != WALL)
 			{
-				ft_printf("Error: Invalid character in map\n");
+				ft_printf("Error: Invalid character '%c' in map at (%d, %d)\n",
+					current, i, j);
 				return (0);
 			}
 			j++;
@@ -154,7 +146,6 @@ int	validate_map(t_game *game)
 		i++;
 	}
 	game->map.collectibles = collectibles;
-	// Vérifier le nombre correct d'éléments
 	if (player != 1 || exit != 1 || collectibles < 1)
 	{
 		ft_printf("Error: Invalid number of elements (P: %d, E: %d, C: %d)\n",
@@ -163,4 +154,33 @@ int	validate_map(t_game *game)
 	}
 	ft_printf("Map validation successful\n");
 	return (1);
+}
+
+int	flood_fill(t_game *game, int x, int y, int *collectibles)
+{
+	char	original;
+	int		reachable;
+
+	if (game->map.map[y][x] == WALL || game->map.map[y][x] == 'V')
+		return (0);
+	if (game->map.map[y][x] == COLLECTIBLE)
+		(*collectibles)--;
+	else if (game->map.map[y][x] == EXIT)
+		return (1);
+	original = game->map.map[y][x];
+	game->map.map[y][x] = 'V';
+	reachable = flood_fill(game, x + 1, y, collectibles) || flood_fill(game, x
+			- 1, y, collectibles) || flood_fill(game, x, y + 1, collectibles)
+		|| flood_fill(game, x, y - 1, collectibles);
+	game->map.map[y][x] = original;
+	return (reachable);
+}
+
+int	is_map_playable(t_game *game)
+{
+	int collectibles = game->map.collectibles;
+	int exit_reachable = flood_fill(game, game->map.player.x,
+			game->map.player.y, &collectibles);
+
+	return (exit_reachable && collectibles == 0);
 }

@@ -98,3 +98,10 @@ Man des prototypes de fonctions de la MLX: https://qst0.github.io/ft_libgfx/man_
    │ C. Configurer hooks d'événements
    │ D. Lancer boucle de jeu
    └───────────────────────────────────────────────────────────────────────
+
+
+🆗 taille de la map pas en accord avec la taille de la fenetre + affichge du message de fin au milieu de la fenetre en fonction 
+🆗 possibilite de recuperer? l exit avant meme d avoir recuperer tous les collectibles --> ajouter l imposibilite de passer sur l exit tant qu on a pas recuper tous les collectibles
+⏳taille des .xpm pas en accord ? Je dois surement changer leurs taille ou changer l affichage pour le rendre plus grand
+⏳key_hold pour les touches ??
+
