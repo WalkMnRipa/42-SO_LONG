@@ -1,16 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   clean.c                                            :+:      :+:    :+:   */
+/*   cleanup.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 18:08:47 by jcohen            #+#    #+#             */
-/*   Updated: 2024/07/15 16:25:58 by jcohen           ###   ########.fr       */
+/*   Updated: 2024/07/17 19:48:25 by jcohen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/so_long.h"
+#include "../../includes/so_long.h"
+
+void	ft_free_map(t_game *game)
+{
+	int	i;
+
+	if (!game || !game->map.map)
+		return ;
+	i = 0;
+	while (i < game->map.rows)
+	{
+		if (game->map.map[i])
+			free(game->map.map[i]);
+		i++;
+	}
+	free(game->map.map);
+	game->map.map = NULL;
+}
 
 void	ft_destroy_images(t_game *game)
 {
@@ -28,16 +45,9 @@ void	ft_destroy_images(t_game *game)
 
 void	ft_cleanup(t_game *game)
 {
-	int	i;
-
-	i = 0;
-	while (i < game->map.rows)
-	{
-		if (game->map.map[i])
-			free(game->map.map[i]);
-		i++;
-	}
-	free(game->map.map);
+	if (!game)
+		return ;
+	ft_free_map(game);
 	ft_destroy_images(game);
 	if (game->mlx)
 	{
@@ -46,4 +56,12 @@ void	ft_cleanup(t_game *game)
 		mlx_destroy_display(game->mlx);
 		free(game->mlx);
 	}
+}
+
+int	exit_game(t_game *game)
+{
+	ft_printf("Exiting game...\n");
+	ft_cleanup(game);
+	exit(0);
+	return (0);
 }

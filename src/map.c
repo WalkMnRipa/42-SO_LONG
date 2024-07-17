@@ -6,13 +6,13 @@
 /*   By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 18:08:45 by jcohen            #+#    #+#             */
-/*   Updated: 2024/07/13 22:56:26 by jcohen           ###   ########.fr       */
+/*   Updated: 2024/07/15 16:53:49 by jcohen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-static int	count_rows(char *filename)
+static int	ft_count_rows(char *filename)
 {
 	char	*line;
 
@@ -37,7 +37,7 @@ int	load_map(t_game *game, char *filename)
 	char	*line;
 
 	int fd, i = 0;
-	game->map.rows = count_rows(filename);
+	game->map.rows = ft_count_rows(filename);
 	if (game->map.rows <= 0)
 		return (0);
 	game->map.map = malloc(sizeof(char *) * (game->map.rows + 1));
@@ -59,6 +59,7 @@ int	load_map(t_game *game, char *filename)
 			free(game->map.map);
 			free(line);
 			close(fd);
+			ft_printf("Error: Failed to load map\n");
 			return (0);
 		}
 		if (game->map.map[i][(int)ft_strlen(game->map.map[i]) - 1] == '\n')
@@ -88,7 +89,7 @@ void	ft_print_map(t_game *game)
 	ft_printf("\n");
 }
 
-int	validate_map(t_game *game)
+int	ft_validate_map(t_game *game)
 {
 	int		first_row_length;
 	char	current;
@@ -115,7 +116,8 @@ int	validate_map(t_game *game)
 			{
 				if (current != WALL)
 				{
-					ft_printf("Error: Map not by walls at (%d,% d)\n ", i, j);
+					ft_printf("Error: Map not surroud by walls (%d,%d)\n ", i,
+						j);
 					return (0);
 				}
 			}
@@ -156,31 +158,49 @@ int	validate_map(t_game *game)
 	return (1);
 }
 
-int	flood_fill(t_game *game, int x, int y, int *collectibles)
+int	flood_fill(t_game *game, int x, int y, int *collectibles, int *exit_found)
 {
-	char	original;
-	int		reachable;
-
+	if (x < 0 || y < 0 || x >= game->map.columns || y >= game->map.rows)
+		return (0);
 	if (game->map.map[y][x] == WALL || game->map.map[y][x] == 'V')
 		return (0);
 	if (game->map.map[y][x] == COLLECTIBLE)
 		(*collectibles)--;
 	else if (game->map.map[y][x] == EXIT)
-		return (1);
-	original = game->map.map[y][x];
+		*exit_found = 1;
 	game->map.map[y][x] = 'V';
-	reachable = flood_fill(game, x + 1, y, collectibles) || flood_fill(game, x
-			- 1, y, collectibles) || flood_fill(game, x, y + 1, collectibles)
-		|| flood_fill(game, x, y - 1, collectibles);
-	game->map.map[y][x] = original;
-	return (reachable);
+	flood_fill(game, x + 1, y, collectibles, exit_found);
+	flood_fill(game, x - 1, y, collectibles, exit_found);
+	flood_fill(game, x, y + 1, collectibles, exit_found);
+	flood_fill(game, x, y - 1, collectibles, exit_found);
+	return (1);
 }
 
-int	is_map_playable(t_game *game)
+int	ft_is_map_playable(t_game *game)
 {
-	int collectibles = game->map.collectibles;
-	int exit_reachable = flood_fill(game, game->map.player.x,
-			game->map.player.y, &collectibles);
+	int		collectibles;
+	int		exit_found;
+	char	**temp_map;
+	int		i;
 
-	return (exit_reachable && collectibles == 0);
+	i = 0;
+	collectibles = game->map.collectibles;
+	exit_found = 0;
+	temp_map = malloc(sizeof(char *) * game->map.rows);
+	while (i < game->map.rows)
+	{
+		temp_map[i] = ft_strdup(game->map.map[i]);
+		i++;
+	}
+	flood_fill(game, game->map.player.x, game->map.player.y, &collectibles,
+		&exit_found);
+	i = 0;
+	while (i < game->map.rows)
+	{
+		ft_strncpy(game->map.map[i], temp_map[i], game->map.columns + 1);
+		free(temp_map[i]);
+		i++;
+	}
+	free(temp_map);
+	return (exit_found && collectibles == 0);
 }

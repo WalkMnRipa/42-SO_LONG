@@ -6,7 +6,7 @@
 /*   By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 00:21:18 by jcohen            #+#    #+#             */
-/*   Updated: 2024/07/13 22:57:54 by jcohen           ###   ########.fr       */
+/*   Updated: 2024/07/17 21:31:32 by jcohen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,22 +90,38 @@ typedef struct s_game
 
 int				init_game(t_game *game);
 int				load_images(t_game *game);
+void			init_player(t_game *game);
+void			ft_cleanup(t_game *game);
+int				exit_game(t_game *game);
+
+int				ft_is_valid_position(t_game *game, int x, int y);
+int				ft_count_rows(char *filename);
 int				load_map(t_game *game, char *file);
+void			ft_free_map(t_game *game);
 void			ft_print_map(t_game *game);
-int				validate_map(t_game *game);
-int				flood_fill(t_game *game, int x, int y, int *visited);
-int				is_map_playable(t_game *game);
+char			**ft_copy_map(t_game *game);
+void			ft_restore_map(t_game *game, char **temp_map);
+void			ft_init_map_elements(t_game *game);
+int				ft_validate_map_dimensions(t_game *game);
+void			ft_count_map_elements(t_game *game, int i, int j);
+int				ft_perform_flood_fill(t_game *game);
+int				ft_validate_map(t_game *game);
+int				ft_flood_fill(t_game *game);
+int				ft_is_map_playable(t_game *game);
 
 void			draw_tile(t_game *game, void *img, int x, int y);
 void			render_map(t_game *game);
 void			render_movements(t_game *game);
 void			display_victory_message(t_game *game);
+void			*load_image(t_game *game, char *path);
 
 int				move_player(t_game *game, int dx, int dy);
 int				key_press(int keycode, t_game *game);
+void			update_player_position(t_game *game, int new_x, int new_y);
+int				check_collision(t_game *game, int x, int y);
+int				game_loop(t_game *game);
 
-void			free_map(t_map *map);
-void			destroy_images(t_game *game);
-void			cleanup(t_game *game);
+void			ft_destroy_images(t_game *game);
+void			ft_cleanup(t_game *game);
 
 #endif

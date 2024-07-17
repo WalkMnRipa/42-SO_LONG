@@ -6,40 +6,11 @@
 /*   By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 18:08:42 by jcohen            #+#    #+#             */
-/*   Updated: 2024/07/15 16:27:25 by jcohen           ###   ########.fr       */
+/*   Updated: 2024/07/17 17:10:01 by jcohen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/so_long.h"
-
-int	move_player(t_game *game, int dx, int dy)
-{
-	int	new_x;
-	int	new_y;
-
-	new_x = game->map.player.x + dx;
-	new_y = game->map.player.y + dy;
-	if (game->map.map[new_y][new_x] == WALL)
-		return (0);
-	if (game->map.map[new_y][new_x] == COLLECTIBLE)
-	{
-		game->map.collectibles--;
-		game->map.map[new_y][new_x] = FLOOR;
-	}
-	if (game->map.map[new_y][new_x] == EXIT)
-	{
-		if (game->map.collectibles > 0)
-			return (0);
-		game->victory = true;
-		return (1);
-	}
-	game->map.map[game->map.player.y][game->map.player.x] = FLOOR;
-	game->map.player.x = new_x;
-	game->map.player.y = new_y;
-	game->map.map[new_y][new_x] = PLAYER;
-	game->movements++;
-	return (1);
-}
+#include "../../includes/so_long.h"
 
 int	key_press(int keycode, t_game *game)
 {
@@ -52,13 +23,38 @@ int	key_press(int keycode, t_game *game)
 	else if (keycode == KEY_D || keycode == KEY_RIGHT)
 		move_player(game, 1, 0);
 	else if (keycode == KEY_ESC)
-	{
-		ft_cleanup(game);
-		exit(0);
-	}
+		exit_game(game);
 	render_map(game);
 	render_movements(game);
 	if (game->victory)
 		display_victory_message(game);
+	return (0);
+}
+
+void	display_victory_message(t_game *game)
+{
+	char	*message;
+	int		text_width;
+	int		x;
+	int		y;
+
+	message = "You Win!";
+	text_width = ft_strlen(message) * 10;
+	x = (game->window_width - text_width) / 2;
+	y = game->window_height / 2;
+	mlx_clear_window(game->mlx, game->win);
+	mlx_string_put(game->mlx, game->win, x, y, 0xFFFFFF, message);
+	ft_printf("Movements: %d\n", game->movements);
+	ft_printf("YOU WIN!\n");
+	mlx_do_sync(game->mlx);
+	usleep(3000000);
+	ft_cleanup(game);
+	exit(0);
+}
+
+int	game_loop(t_game *game)
+{
+	render_map(game);
+	render_movements(game);
 	return (0);
 }
