@@ -6,7 +6,7 @@
 /*   By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 18:08:43 by jcohen            #+#    #+#             */
-/*   Updated: 2024/07/17 18:55:40 by jcohen           ###   ########.fr       */
+/*   Updated: 2024/07/18 19:14:45 by jcohen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ int	init_game(t_game *game)
 
 int	load_images(t_game *game)
 {
-	game->floor.img = load_image(game, "textures/floor.xpm");
-	game->wall.img = load_image(game, "textures/wall.xpm");
+	game->floor.img = load_image(game, "textures/wall.xpm");
+	game->wall.img = load_image(game, "textures/floor.xpm");
 	game->collectible.img = load_image(game, "textures/collectible.xpm");
 	game->exit.img = load_image(game, "textures/exit.xpm");
 	game->player.img = load_image(game, "textures/player.xpm");

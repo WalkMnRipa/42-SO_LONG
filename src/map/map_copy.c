@@ -6,7 +6,7 @@
 /*   By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 20:05:46 by jcohen            #+#    #+#             */
-/*   Updated: 2024/07/17 21:29:13 by jcohen           ###   ########.fr       */
+/*   Updated: 2024/07/18 19:34:04 by jcohen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	ft_restore_map(t_game *game, char **temp_map)
 	{
 		if (temp_map[i] == NULL)
 			break ;
-		ft_strncpy(game->map.map[i], temp_map[i], game->map.columns + 1);
+		ft_strlcpy(game->map.map[i], temp_map[i], game->map.columns + 1);
 		free(temp_map[i]);
 		i++;
 	}

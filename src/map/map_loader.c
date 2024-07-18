@@ -6,7 +6,7 @@
 /*   By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 17:33:01 by jcohen            #+#    #+#             */
-/*   Updated: 2024/07/17 20:47:41 by jcohen           ###   ########.fr       */
+/*   Updated: 2024/07/18 19:39:51 by jcohen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,11 @@ static int	ft_process_map_lines(t_game *game, int fd)
 			break ;
 		if (!ft_read_map_line(game, line, i))
 		{
-			ft_free_map(game);
 			free(line);
+			while (i > 0)
+				free(game->map.map[i--]);
+			free(game->map.map);
+			game->map.map = NULL;
 			return (-1);
 		}
 		free(line);

@@ -113,17 +113,8 @@ Man des prototypes de fonctions de la MLX: https://qst0.github.io/ft_libgfx/man_
   - Mettre à jour chaque image du jeu (joueur, murs, collectibles, etc.)
   - Vérifier la cohérence visuelle après les modifications
 
-## 🕹️ Contrôles du jeu
-- [ ] 🔄 Implémenter le mouvement continu du personnage
-  - Ajouter une détection de pression prolongée des touches
-  - Créer une fonction pour le mouvement automatique
-  - Tester différentes vitesses de déplacement pour une expérience optimale
-
 ## ⏱️ Fonctionnalités supplémentaires
-- [ ] ⏳ Ajouter un chronomètre
-  - Concevoir l'interface utilisateur pour afficher le temps
-  - Implémenter la logique de chronométrage
-  - Lancement des le lancement du jeu
+- [ ] ⏳ Ajout d'un plafond de deplacements max, le nombre de deplacement diminue a chaque mouvement
 
 ## 🧪 Tests
 - [ ] 🔬 Créer des tests pour les nouvelles fonctionnalités
