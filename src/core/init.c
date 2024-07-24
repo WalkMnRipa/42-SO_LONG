@@ -6,7 +6,7 @@
 /*   By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 18:08:43 by jcohen            #+#    #+#             */
-/*   Updated: 2024/07/18 19:14:45 by jcohen           ###   ########.fr       */
+/*   Updated: 2024/07/24 21:27:38 by jcohen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,18 +25,29 @@ int	init_game(t_game *game)
 	}
 	game->movements = 0;
 	game->victory = false;
+	game->player_direction = PLAYER_FRONT;
 	return (1);
 }
 
 int	load_images(t_game *game)
 {
-	game->floor.img = load_image(game, "textures/wall.xpm");
-	game->wall.img = load_image(game, "textures/floor.xpm");
+	game->floor.img = load_image(game, "textures/floor.xpm");
+	game->wall.img = load_image(game, "textures/wall.xpm");
 	game->collectible.img = load_image(game, "textures/collectible.xpm");
 	game->exit.img = load_image(game, "textures/exit.xpm");
-	game->player.img = load_image(game, "textures/player.xpm");
+	game->player_images[PLAYER_FRONT].img = load_image(game,
+			"textures/player_front.xpm");
+	game->player_images[PLAYER_BACK].img = load_image(game,
+			"textures/player_back.xpm");
+	game->player_images[PLAYER_LEFT].img = load_image(game,
+			"textures/player_left.xpm");
+	game->player_images[PLAYER_RIGHT].img = load_image(game,
+			"textures/player_right.xpm");
 	if (!game->floor.img || !game->wall.img || !game->collectible.img
-		|| !game->exit.img || !game->player.img)
+		|| !game->exit.img || !game->player_images[PLAYER_FRONT].img
+		|| !game->player_images[PLAYER_BACK].img
+		|| !game->player_images[PLAYER_LEFT].img
+		|| !game->player_images[PLAYER_RIGHT].img)
 	{
 		ft_printf("Error: Failed to load images\n");
 		return (0);
@@ -65,4 +76,9 @@ void	init_player(t_game *game)
 		}
 		i++;
 	}
+}
+
+void	*get_player_image(t_game *game)
+{
+	return (game->player_images[game->player_direction].img);
 }

@@ -6,7 +6,7 @@
 /*   By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 00:21:18 by jcohen            #+#    #+#             */
-/*   Updated: 2024/07/17 21:31:32 by jcohen           ###   ########.fr       */
+/*   Updated: 2024/07/24 21:22:53 by jcohen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,16 @@
 
 # define WINDOW_WIDTH 1000
 # define WINDOW_HEIGHT 1000
+# define PLAYER_FRONT 0
+# define PLAYER_BACK 1
+# define PLAYER_LEFT 2
+# define PLAYER_RIGHT 3
 # define WALL '1'
 # define PLAYER 'P'
 # define COLLECTIBLE 'C'
 # define EXIT 'E'
 # define FLOOR '0'
-# define TILE_SIZE 48
+# define TILE_SIZE 32
 # define EVENT_EXIT 17
 # define KEY_ESC 65307
 # define KEY_UP 65362
@@ -85,12 +89,14 @@ typedef struct s_game
 	t_image		wall;
 	t_image		collectible;
 	t_image		exit;
-	t_image		player;
+	t_image		player_images[4];
+	int			player_direction;
 }				t_game;
 
 int				init_game(t_game *game);
 int				load_images(t_game *game);
 void			init_player(t_game *game);
+void			*get_player_image(t_game *game);
 void			ft_cleanup(t_game *game);
 int				exit_game(t_game *game);
 
@@ -109,11 +115,10 @@ int				ft_validate_map(t_game *game);
 int				ft_flood_fill(t_game *game);
 int				ft_is_map_playable(t_game *game);
 
-void			draw_tile(t_game *game, void *img, int x, int y);
-void			render_map(t_game *game);
-void			render_movements(t_game *game);
-void			display_victory_message(t_game *game);
 void			*load_image(t_game *game, char *path);
+void			draw_player(t_game *game, int x, int y);
+void			render_map(t_game *game);
+void			display_victory_message(t_game *game);
 
 int				move_player(t_game *game, int dx, int dy);
 int				key_press(int keycode, t_game *game);

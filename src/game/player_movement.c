@@ -6,7 +6,7 @@
 /*   By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 17:27:47 by jcohen            #+#    #+#             */
-/*   Updated: 2024/07/17 17:22:31 by jcohen           ###   ########.fr       */
+/*   Updated: 2024/07/24 21:12:11 by jcohen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,18 @@ void	update_player_position(t_game *game, int new_x, int new_y)
 	game->movements++;
 }
 
+static void	update_player_direction(t_game *game, int dx, int dy)
+{
+	if (dx > 0)
+		game->player_direction = PLAYER_RIGHT;
+	else if (dx < 0)
+		game->player_direction = PLAYER_LEFT;
+	else if (dy > 0)
+		game->player_direction = PLAYER_FRONT;
+	else if (dy < 0)
+		game->player_direction = PLAYER_BACK;
+}
+
 int	move_player(t_game *game, int dx, int dy)
 {
 	int	new_x;
@@ -35,6 +47,7 @@ int	move_player(t_game *game, int dx, int dy)
 	new_y = game->map.player.y + dy;
 	if (!check_collision(game, new_x, new_y))
 		return (0);
+	update_player_direction(game, dx, dy);
 	if (game->map.map[new_y][new_x] == COLLECTIBLE)
 	{
 		game->map.collectibles--;

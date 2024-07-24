@@ -6,7 +6,7 @@
 /*   By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 18:08:47 by jcohen            #+#    #+#             */
-/*   Updated: 2024/07/18 19:35:49 by jcohen           ###   ########.fr       */
+/*   Updated: 2024/07/24 20:48:51 by jcohen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,9 @@ void	ft_free_map(t_game *game)
 
 void	ft_destroy_images(t_game *game)
 {
+	int	i;
+
+	i = PLAYER_FRONT;
 	if (game->floor.img)
 		mlx_destroy_image(game->mlx, game->floor.img);
 	if (game->wall.img)
@@ -39,8 +42,12 @@ void	ft_destroy_images(t_game *game)
 		mlx_destroy_image(game->mlx, game->collectible.img);
 	if (game->exit.img)
 		mlx_destroy_image(game->mlx, game->exit.img);
-	if (game->player.img)
-		mlx_destroy_image(game->mlx, game->player.img);
+	while (i <= PLAYER_RIGHT)
+	{
+		if (game->player_images[i].img)
+			mlx_destroy_image(game->mlx, game->player_images[i].img);
+		i++;
+	}
 }
 
 void	ft_cleanup(t_game *game)

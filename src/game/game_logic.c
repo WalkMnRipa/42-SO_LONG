@@ -6,7 +6,7 @@
 /*   By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 18:08:42 by jcohen            #+#    #+#             */
-/*   Updated: 2024/07/17 17:10:01 by jcohen           ###   ########.fr       */
+/*   Updated: 2024/07/24 21:22:25 by jcohen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int	key_press(int keycode, t_game *game)
 	else if (keycode == KEY_ESC)
 		exit_game(game);
 	render_map(game);
-	render_movements(game);
 	if (game->victory)
 		display_victory_message(game);
 	return (0);
@@ -55,6 +54,5 @@ void	display_victory_message(t_game *game)
 int	game_loop(t_game *game)
 {
 	render_map(game);
-	render_movements(game);
 	return (0);
 }

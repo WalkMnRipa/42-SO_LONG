@@ -6,7 +6,7 @@
 /*   By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 18:08:46 by jcohen            #+#    #+#             */
-/*   Updated: 2024/07/17 19:51:50 by jcohen           ###   ########.fr       */
+/*   Updated: 2024/07/24 21:22:43 by jcohen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	*load_image(t_game *game, char *path)
 	return (img);
 }
 
-void	draw_tile(t_game *game, void *img, int x, int y)
+static void	draw_tile(t_game *game, void *img, int x, int y)
 {
 	if (!img)
 	{
@@ -48,18 +48,30 @@ static void	draw_tile_by_type(t_game *game, int i, int j)
 	else if (game->map.map[i][j] == EXIT)
 		draw_tile(game, game->exit.img, j, i);
 	else if (game->map.map[i][j] == PLAYER)
-		draw_tile(game, game->player.img, j, i);
+		draw_player(game, j, i);
 	else if (game->map.map[i][j] != FLOOR)
 		ft_printf("Error: Invalid tile at (%d, %d)\n", j, i);
 }
 
+void	draw_player(t_game *game, int x, int y)
+{
+	void	*player_img;
+
+	if (game->player_direction >= PLAYER_FRONT
+		&& game->player_direction <= PLAYER_RIGHT)
+		player_img = game->player_images[game->player_direction].img;
+	else
+		player_img = game->player_images[PLAYER_FRONT].img;
+	draw_tile(game, player_img, x, y);
+}
+
 void	render_map(t_game *game)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
+	char	*str;
 
 	i = 0;
-	j = 0;
 	while (i < game->map.rows)
 	{
 		j = 0;
@@ -70,16 +82,9 @@ void	render_map(t_game *game)
 		}
 		i++;
 	}
-	render_movements(game);
-	mlx_do_sync(game->mlx);
-}
-
-void	render_movements(t_game *game)
-{
-	char	*str;
-
 	str = ft_itoa(game->movements);
 	mlx_string_put(game->mlx, game->win, 10, 20, 0xFFFFFF, "Movements: ");
 	mlx_string_put(game->mlx, game->win, 100, 20, 0xFFFFFF, str);
 	free(str);
+	mlx_do_sync(game->mlx);
 }

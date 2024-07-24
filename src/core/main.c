@@ -6,7 +6,7 @@
 /*   By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 18:08:44 by jcohen            #+#    #+#             */
-/*   Updated: 2024/07/17 21:06:37 by jcohen           ###   ########.fr       */
+/*   Updated: 2024/07/24 21:20:46 by jcohen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	render_map(&game);
-	render_movements(&game);
 	setup_hooks(&game);
 	ft_printf("Starting game loop...\n");
 	mlx_loop(game.mlx);
