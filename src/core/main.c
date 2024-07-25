@@ -6,7 +6,7 @@
 /*   By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 18:08:44 by jcohen            #+#    #+#             */
-/*   Updated: 2024/07/24 21:20:46 by jcohen           ###   ########.fr       */
+/*   Updated: 2024/07/25 20:57:36 by jcohen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,22 @@ static int	init_and_load(t_game *game, char *map_file)
 	if (!game->mlx)
 		return (0);
 	if (!load_map(game, map_file))
+	{
+		ft_cleanup(game);
 		return (0);
+	}
 	if (!ft_is_map_playable(game))
+	{
+		ft_printf("Error: Map is not playable\n");
+		ft_cleanup(game);
 		return (0);
-	if (!init_game(game))
+	}
+	if (!init_game(game) || !load_images(game))
+	{
+		ft_cleanup(game);
 		return (0);
-	if (!load_images(game))
-		return (0);
+	}
+	init_enemy(game);
 	ft_printf("Game initialized successfully.\n");
 	return (1);
 }
@@ -33,6 +42,7 @@ static void	setup_hooks(t_game *game)
 {
 	mlx_key_hook(game->win, key_press, game);
 	mlx_hook(game->win, 17, 1L << 17, exit_game, game);
+	mlx_loop_hook(game->mlx, game_loop, game);
 }
 
 int	main(int argc, char **argv)

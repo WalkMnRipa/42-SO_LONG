@@ -6,7 +6,7 @@
 /*   By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 00:21:18 by jcohen            #+#    #+#             */
-/*   Updated: 2024/07/25 20:20:19 by jcohen           ###   ########.fr       */
+/*   Updated: 2024/07/25 20:46:57 by jcohen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,7 @@ int				ft_flood_fill(t_game *game);
 int				ft_is_map_playable(t_game *game);
 
 void			*load_image(t_game *game, char *path);
+void			draw_tile(t_game *game, void *img, int x, int y);
 void			draw_player(t_game *game, int x, int y);
 void			render_map(t_game *game);
 void			display_victory_message(t_game *game);
@@ -141,6 +142,6 @@ void			ft_cleanup(t_game *game);
 void			render_enemy(t_game *game);
 void			move_enemy(t_game *game);
 void			init_enemy(t_game *game);
-int				check_enemy_collision(t_game *game, int x, int y);
+int				check_enemy_collision(t_game *game);
 
 #endif

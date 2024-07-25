@@ -6,7 +6,7 @@
 /*   By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 20:03:55 by jcohen            #+#    #+#             */
-/*   Updated: 2024/07/25 20:04:54 by jcohen           ###   ########.fr       */
+/*   Updated: 2024/07/25 21:00:25 by jcohen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,6 @@
 
 void	render_enemy(t_game *game)
 {
-	draw_tile(game, game->enemy_img, game->enemy.position.x,
+	draw_tile(game, game->enemy_img.img, game->enemy.position.x,
 		game->enemy.position.y);
 }

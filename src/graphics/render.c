@@ -6,7 +6,7 @@
 /*   By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 18:08:46 by jcohen            #+#    #+#             */
-/*   Updated: 2024/07/25 20:06:41 by jcohen           ###   ########.fr       */
+/*   Updated: 2024/07/25 20:47:08 by jcohen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	*load_image(t_game *game, char *path)
 	return (img);
 }
 
-static void	draw_tile(t_game *game, void *img, int x, int y)
+void	draw_tile(t_game *game, void *img, int x, int y)
 {
 	if (!img)
 	{

@@ -6,7 +6,7 @@
 /*   By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 18:08:47 by jcohen            #+#    #+#             */
-/*   Updated: 2024/07/24 20:48:51 by jcohen           ###   ########.fr       */
+/*   Updated: 2024/07/25 20:38:21 by jcohen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ void	ft_destroy_images(t_game *game)
 		mlx_destroy_image(game->mlx, game->collectible.img);
 	if (game->exit.img)
 		mlx_destroy_image(game->mlx, game->exit.img);
+	if (game->enemy_img.img)
+		mlx_destroy_image(game->mlx, game->enemy_img.img);
 	while (i <= PLAYER_RIGHT)
 	{
 		if (game->player_images[i].img)

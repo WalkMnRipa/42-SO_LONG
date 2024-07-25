@@ -6,7 +6,7 @@
 /*   By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 20:11:55 by jcohen            #+#    #+#             */
-/*   Updated: 2024/07/25 20:20:06 by jcohen           ###   ########.fr       */
+/*   Updated: 2024/07/25 21:00:17 by jcohen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ void	init_enemy(t_game *game)
 
 void	move_enemy(t_game *game)
 {
-	int new_x;
-	int new_y;
+	int	new_x;
+	int	new_y;
 
 	new_x = game->enemy.position.x;
 	new_y = game->enemy.position.y;

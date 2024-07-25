@@ -6,7 +6,7 @@
 /*   By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 17:27:47 by jcohen            #+#    #+#             */
-/*   Updated: 2024/07/25 20:07:52 by jcohen           ###   ########.fr       */
+/*   Updated: 2024/07/25 20:45:50 by jcohen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	check_collision(t_game *game, int x, int y)
 	return (game->map.map[y][x] != WALL);
 }
 
-int	check_enemy_collision(t_game *game, int x, int y)
+int	check_enemy_collision(t_game *game)
 {
 	return (game->map.player.x == game->enemy.position.x
 		&& game->map.player.y == game->enemy.position.y);

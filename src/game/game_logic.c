@@ -6,7 +6,7 @@
 /*   By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 18:08:42 by jcohen            #+#    #+#             */
-/*   Updated: 2024/07/25 20:11:24 by jcohen           ###   ########.fr       */
+/*   Updated: 2024/07/25 20:51:21 by jcohen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,9 @@ int	game_loop(t_game *game)
 	static int	frames = 0;
 
 	frames++;
-	if (frames % 5 == 0)
+	if (frames % 100 == 0)
 		move_enemy(game);
-	if (check_enemy_collision(game, game->map.player.x, game->map.player.y))
+	if (check_enemy_collision(game))
 	{
 		ft_printf("GAME OVER !!\n");
 		return (exit_game(game));
