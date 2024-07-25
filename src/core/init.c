@@ -6,7 +6,7 @@
 /*   By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 18:08:43 by jcohen            #+#    #+#             */
-/*   Updated: 2024/07/24 21:27:38 by jcohen           ###   ########.fr       */
+/*   Updated: 2024/07/25 20:03:06 by jcohen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,12 @@ int	load_images(t_game *game)
 			"textures/player_left.xpm");
 	game->player_images[PLAYER_RIGHT].img = load_image(game,
 			"textures/player_right.xpm");
+	game->enemy_img.img = load_image(game, "textures/enemy.xpm");
 	if (!game->floor.img || !game->wall.img || !game->collectible.img
 		|| !game->exit.img || !game->player_images[PLAYER_FRONT].img
 		|| !game->player_images[PLAYER_BACK].img
 		|| !game->player_images[PLAYER_LEFT].img
-		|| !game->player_images[PLAYER_RIGHT].img)
+		|| !game->player_images[PLAYER_RIGHT].img || !game->enemy_img.img)
 	{
 		ft_printf("Error: Failed to load images\n");
 		return (0);

@@ -6,7 +6,7 @@
 /*   By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 00:21:18 by jcohen            #+#    #+#             */
-/*   Updated: 2024/07/24 21:22:53 by jcohen           ###   ########.fr       */
+/*   Updated: 2024/07/25 20:20:19 by jcohen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,13 @@ typedef struct s_player
 	int			moves;
 }				t_player;
 
+typedef struct s_enemy
+{
+	t_position	position;
+	int			direction;
+	bool		is_vertical;
+}				t_enemy;
+
 typedef struct s_image
 {
 	void		*img;
@@ -85,6 +92,8 @@ typedef struct s_game
 	int			movements;
 	bool		victory;
 	t_map		map;
+	t_enemy		enemy;
+	t_image		enemy_img;
 	t_image		floor;
 	t_image		wall;
 	t_image		collectible;
@@ -128,5 +137,10 @@ int				game_loop(t_game *game);
 
 void			ft_destroy_images(t_game *game);
 void			ft_cleanup(t_game *game);
+
+void			render_enemy(t_game *game);
+void			move_enemy(t_game *game);
+void			init_enemy(t_game *game);
+int				check_enemy_collision(t_game *game, int x, int y);
 
 #endif

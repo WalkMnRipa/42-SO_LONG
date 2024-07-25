@@ -6,13 +6,13 @@
 #    By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/28 23:47:56 by jcohen            #+#    #+#              #
-#    Updated: 2024/07/17 20:49:24 by jcohen           ###   ########.fr        #
+#    Updated: 2024/07/25 18:07:54 by jcohen           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = so_long
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g3
+CFLAGS = -Wall -Wextra -Werror
 MLXFLAGS = -lmlx -lXext -lX11 -lm
 
 SRC_DIR = src

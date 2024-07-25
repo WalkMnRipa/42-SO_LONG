@@ -6,7 +6,7 @@
 /*   By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 18:08:46 by jcohen            #+#    #+#             */
-/*   Updated: 2024/07/24 21:22:43 by jcohen           ###   ########.fr       */
+/*   Updated: 2024/07/25 20:06:41 by jcohen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,9 +82,10 @@ void	render_map(t_game *game)
 		}
 		i++;
 	}
+	render_enemy(game);
 	str = ft_itoa(game->movements);
-	mlx_string_put(game->mlx, game->win, 10, 20, 0xFFFFFF, "Movements: ");
-	mlx_string_put(game->mlx, game->win, 100, 20, 0xFFFFFF, str);
+	mlx_string_put(game->mlx, game->win, 10, 20, 0x000000, "Movements");
+	mlx_string_put(game->mlx, game->win, 75, 20, 0x000000, str);
 	free(str);
 	mlx_do_sync(game->mlx);
 }
