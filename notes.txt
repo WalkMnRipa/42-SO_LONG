@@ -6,5 +6,5 @@ Generaion de l enemy en fonciton de la taille de la map, si trop petite impossib
 Mouvements aleatoire peut etre
 
 Ajout de sprites sur les flammes 
-Ajustement de la vitesse de deplacement de l enemy en fonction de la distance a parcourir de MUR -> MUR
+Ajustement de la vitesse de deplacement de l enemy en fonction de la distance a parcourir de MUR <-> MUR
 

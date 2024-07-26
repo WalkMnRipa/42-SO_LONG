@@ -6,7 +6,7 @@
 /*   By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 18:08:44 by jcohen            #+#    #+#             */
-/*   Updated: 2024/07/25 20:57:36 by jcohen           ###   ########.fr       */
+/*   Updated: 2024/07/26 22:32:50 by jcohen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static int	init_and_load(t_game *game, char *map_file)
 		ft_cleanup(game);
 		return (0);
 	}
-	init_enemy(game);
+	init_enemy_random(game);
 	ft_printf("Game initialized successfully.\n");
 	return (1);
 }

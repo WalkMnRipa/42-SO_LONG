@@ -6,7 +6,7 @@
 #    By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/28 23:47:56 by jcohen            #+#    #+#              #
-#    Updated: 2024/07/25 20:59:57 by jcohen           ###   ########.fr        #
+#    Updated: 2024/07/26 22:32:10 by jcohen           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ SRCS = $(CORE_DIR)/main.c $(CORE_DIR)/init.c $(CORE_DIR)/cleanup.c \
        $(MAP_DIR)/map_loader.c $(MAP_DIR)/map_validator.c $(MAP_DIR)/map_utils.c \
 	   $(MAP_DIR)/map_flood_fill.c $(MAP_DIR)/map_copy.c \
        $(GRAPHICS_DIR)/render.c $(GRAPHICS_DIR)/render_enemy.c \
-	   $(GAME_DIR)/enemy_movement.c
+	   $(GAME_DIR)/enemy_movement.c $(GAME_DIR)/enemy_init.c \
 
 OBJS_DIR = objs
 OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJS_DIR)/%.o)

@@ -6,7 +6,7 @@
 /*   By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 00:21:18 by jcohen            #+#    #+#             */
-/*   Updated: 2024/07/25 20:46:57 by jcohen           ###   ########.fr       */
+/*   Updated: 2024/07/26 23:15:18 by jcohen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
+# include <time.h>
 # include <unistd.h>
 
 # define WINDOW_WIDTH 1000
@@ -141,7 +142,7 @@ void			ft_cleanup(t_game *game);
 
 void			render_enemy(t_game *game);
 void			move_enemy(t_game *game);
-void			init_enemy(t_game *game);
+void			init_enemy_random(t_game *game);
 int				check_enemy_collision(t_game *game);
 
 #endif

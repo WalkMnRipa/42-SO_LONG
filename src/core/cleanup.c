@@ -6,7 +6,7 @@
 /*   By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 18:08:47 by jcohen            #+#    #+#             */
-/*   Updated: 2024/07/25 20:38:21 by jcohen           ###   ########.fr       */
+/*   Updated: 2024/07/26 23:02:32 by jcohen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,13 @@ void	ft_cleanup(t_game *game)
 	if (game->mlx)
 	{
 		if (game->win)
+		{
 			mlx_destroy_window(game->mlx, game->win);
+			game->win = NULL;
+		}
 		mlx_destroy_display(game->mlx);
 		free(game->mlx);
+		game->mlx = NULL;
 	}
 }
 

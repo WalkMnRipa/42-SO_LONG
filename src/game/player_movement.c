@@ -6,7 +6,7 @@
 /*   By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 17:27:47 by jcohen            #+#    #+#             */
-/*   Updated: 2024/07/25 20:45:50 by jcohen           ###   ########.fr       */
+/*   Updated: 2024/07/26 21:17:33 by jcohen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,5 +67,7 @@ int	move_player(t_game *game, int dx, int dy)
 		return (1);
 	}
 	update_player_position(game, new_x, new_y);
+	if (check_enemy_collision(game))
+		return (exit_game(game));
 	return (1);
 }
