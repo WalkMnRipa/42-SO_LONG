@@ -6,7 +6,7 @@
 /*   By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 18:08:44 by jcohen            #+#    #+#             */
-/*   Updated: 2024/07/26 22:32:50 by jcohen           ###   ########.fr       */
+/*   Updated: 2024/07/27 01:13:36 by jcohen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ static int	init_and_load(t_game *game, char *map_file)
 		return (0);
 	}
 	init_enemy_random(game);
-	ft_printf("Game initialized successfully.\n");
 	return (1);
 }
 
@@ -63,7 +62,6 @@ int	main(int argc, char **argv)
 	}
 	render_map(&game);
 	setup_hooks(&game);
-	ft_printf("Starting game loop...\n");
 	mlx_loop(game.mlx);
 	ft_cleanup(&game);
 	return (0);

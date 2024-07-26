@@ -6,7 +6,7 @@
 /*   By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 00:21:18 by jcohen            #+#    #+#             */
-/*   Updated: 2024/07/26 23:15:18 by jcohen           ###   ########.fr       */
+/*   Updated: 2024/07/27 00:55:49 by jcohen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
+# include <sys/time.h>
 # include <time.h>
 # include <unistd.h>
 
@@ -97,9 +98,10 @@ typedef struct s_game
 	t_image		enemy_img;
 	t_image		floor;
 	t_image		wall;
-	t_image		collectible;
+	t_image		collectible_frames[3];
 	t_image		exit;
 	t_image		player_images[4];
+	int			current_collectible_frame;
 	int			player_direction;
 }				t_game;
 
@@ -128,6 +130,7 @@ int				ft_is_map_playable(t_game *game);
 void			*load_image(t_game *game, char *path);
 void			draw_tile(t_game *game, void *img, int x, int y);
 void			draw_player(t_game *game, int x, int y);
+void			update_collectible_animation(t_game *game);
 void			render_map(t_game *game);
 void			display_victory_message(t_game *game);
 

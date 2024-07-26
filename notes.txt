@@ -5,5 +5,4 @@ Generaion de l enemy en fonciton de la taille de la map, si trop petite impossib
 --> MODE avec et sans ennemies
     -> si avec, taille de map minimum requis
     -> sinon, peu importe
-Ajout de sprites sur les flammes 
-
+Reorganisation du code necessaire

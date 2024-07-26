@@ -6,7 +6,7 @@
 /*   By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 18:08:46 by jcohen            #+#    #+#             */
-/*   Updated: 2024/07/25 20:47:08 by jcohen           ###   ########.fr       */
+/*   Updated: 2024/07/27 01:16:26 by jcohen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,9 @@ static void	draw_tile_by_type(t_game *game, int i, int j)
 	if (game->map.map[i][j] == WALL)
 		draw_tile(game, game->wall.img, j, i);
 	else if (game->map.map[i][j] == COLLECTIBLE)
-		draw_tile(game, game->collectible.img, j, i);
+		draw_tile(game,
+			game->collectible_frames[game->current_collectible_frame].img, j,
+			i);
 	else if (game->map.map[i][j] == EXIT)
 		draw_tile(game, game->exit.img, j, i);
 	else if (game->map.map[i][j] == PLAYER)
@@ -84,8 +86,7 @@ void	render_map(t_game *game)
 	}
 	render_enemy(game);
 	str = ft_itoa(game->movements);
-	mlx_string_put(game->mlx, game->win, 10, 20, 0x000000, "Movements");
-	mlx_string_put(game->mlx, game->win, 75, 20, 0x000000, str);
+	mlx_string_put(game->mlx, game->win, 5, 10, 0x000000, str);
 	free(str);
 	mlx_do_sync(game->mlx);
 }

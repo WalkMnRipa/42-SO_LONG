@@ -6,7 +6,7 @@
 /*   By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 20:05:34 by jcohen            #+#    #+#             */
-/*   Updated: 2024/07/17 21:28:40 by jcohen           ###   ########.fr       */
+/*   Updated: 2024/07/27 01:14:43 by jcohen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,5 @@ int	ft_flood_fill(t_game *game)
 		&collectibles_found);
 	if (game->map.map[game->map.exit.y][game->map.exit.x] == 'V')
 		exit_found = 1;
-	ft_printf("C found: %d, Total C: %d, Exit found:%d\n", collectibles_found,
-		game->map.collectibles, exit_found);
 	return (collectibles_found == game->map.collectibles && exit_found);
 }
