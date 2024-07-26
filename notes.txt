@@ -1,10 +1,9 @@
 A faire 
 
-Gestion de collision entre player et enemy a perfectionner
-Gestion de l enemy vertical ?
-Generaion de l enemy en fonciton de la taille de la map, si trop petite impossible
-Mouvements aleatoire peut etre
 
+Generaion de l enemy en fonciton de la taille de la map, si trop petite impossible
+--> MODE avec et sans ennemies
+    -> si avec, taille de map minimum requis
+    -> sinon, peu importe
 Ajout de sprites sur les flammes 
-Ajustement de la vitesse de deplacement de l enemy en fonction de la distance a parcourir de MUR <-> MUR
 
