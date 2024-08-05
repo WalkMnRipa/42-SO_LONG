@@ -6,7 +6,7 @@
 /*   By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 18:08:43 by jcohen            #+#    #+#             */
-/*   Updated: 2024/07/27 00:35:44 by jcohen           ###   ########.fr       */
+/*   Updated: 2024/08/05 14:46:38 by jcohen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,13 @@ int	init_game(t_game *game)
 static int	load_player_images(t_game *game)
 {
 	game->player_images[PLAYER_FRONT].img = load_image(game,
-			"textures/player_front.xpm");
+			"textures/player/player_front.xpm");
 	game->player_images[PLAYER_BACK].img = load_image(game,
-			"textures/player_back.xpm");
+			"textures/player/player_back.xpm");
 	game->player_images[PLAYER_LEFT].img = load_image(game,
-			"textures/player_left.xpm");
+			"textures/player/player_left.xpm");
 	game->player_images[PLAYER_RIGHT].img = load_image(game,
-			"textures/player_right.xpm");
+			"textures/player/player_right.xpm");
 	return (game->player_images[PLAYER_FRONT].img
 		&& game->player_images[PLAYER_BACK].img
 		&& game->player_images[PLAYER_LEFT].img
@@ -50,9 +50,12 @@ int	load_images(t_game *game)
 {
 	game->floor.img = load_image(game, "textures/floor.xpm");
 	game->wall.img = load_image(game, "textures/wall.xpm");
-	game->collectible_frames[0].img = load_image(game, "textures/flamme1.xpm");
-	game->collectible_frames[1].img = load_image(game, "textures/flamme2.xpm");
-	game->collectible_frames[2].img = load_image(game, "textures/flamme3.xpm");
+	game->collectible_frames[0].img = load_image(game,
+			"textures/collectibles/flamme1.xpm");
+	game->collectible_frames[1].img = load_image(game,
+			"textures/collectibles/flamme2.xpm");
+	game->collectible_frames[2].img = load_image(game,
+			"textures/collectibles/flamme3.xpm");
 	game->exit.img = load_image(game, "textures/exit.xpm");
 	game->enemy_img.img = load_image(game, "textures/enemy.xpm");
 	if (!game->floor.img || !game->wall.img || !game->collectible_frames[0].img

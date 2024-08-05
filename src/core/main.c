@@ -6,7 +6,7 @@
 /*   By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 18:08:44 by jcohen            #+#    #+#             */
-/*   Updated: 2024/07/27 01:13:36 by jcohen           ###   ########.fr       */
+/*   Updated: 2024/08/05 14:56:12 by jcohen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ static int	init_and_load(t_game *game, char *map_file)
 	}
 	if (!ft_is_map_playable(game))
 	{
-		ft_printf("Error: Map is not playable\n");
 		ft_cleanup(game);
 		return (0);
 	}
