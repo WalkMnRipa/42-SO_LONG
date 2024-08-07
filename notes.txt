@@ -1,8 +1,0 @@
-A faire 
-
-
-Generaion de l enemy en fonciton de la taille de la map, si trop petite impossible
---> MODE avec et sans ennemies
-    -> si avec, taille de map minimum requis
-    -> sinon, peu importe
-Reorganisation du code necessaire
