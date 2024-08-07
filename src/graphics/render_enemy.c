@@ -6,7 +6,7 @@
 /*   By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 20:03:55 by jcohen            #+#    #+#             */
-/*   Updated: 2024/08/05 14:43:54 by jcohen           ###   ########.fr       */
+/*   Updated: 2024/08/06 16:55:52 by jcohen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	render_enemy(t_game *game)
 void	update_collectible_animation(t_game *game)
 {
 	static int	frames = 0;
-	
+
 	frames++;
 	if (frames >= FRAMES_PER_ANIMATION)
 	{

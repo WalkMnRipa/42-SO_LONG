@@ -6,7 +6,7 @@
 /*   By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 20:05:34 by jcohen            #+#    #+#             */
-/*   Updated: 2024/07/27 01:14:43 by jcohen           ###   ########.fr       */
+/*   Updated: 2024/08/07 14:28:02 by jcohen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,21 +18,6 @@ static void	ft_mark_as_visited(t_game *game, int x, int y,
 	if (game->map.map[y][x] == COLLECTIBLE)
 		(*collectibles_found)++;
 	game->map.map[y][x] = 'V';
-}
-
-int	ft_perform_flood_fill(t_game *game)
-{
-	char	**temp_map;
-	int		is_playable;
-
-	temp_map = ft_copy_map(game);
-	if (!temp_map)
-		return (0);
-	is_playable = ft_flood_fill(game);
-	ft_restore_map(game, temp_map);
-	if (!is_playable)
-		ft_printf("Error: Map is not playable\n");
-	return (is_playable);
 }
 
 static void	ft_flood_fill_recursive(t_game *game, int x, int y,
@@ -64,4 +49,19 @@ int	ft_flood_fill(t_game *game)
 	if (game->map.map[game->map.exit.y][game->map.exit.x] == 'V')
 		exit_found = 1;
 	return (collectibles_found == game->map.collectibles && exit_found);
+}
+
+int	ft_perform_flood_fill(t_game *game)
+{
+	char	**temp_map;
+	int		is_playable;
+
+	temp_map = ft_copy_map(game);
+	if (!temp_map)
+		return (0);
+	is_playable = ft_flood_fill(game);
+	ft_restore_map(game, temp_map);
+	if (!is_playable)
+		ft_printf("Error: Map is not playable\n");
+	return (is_playable);
 }

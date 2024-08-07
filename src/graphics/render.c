@@ -6,7 +6,7 @@
 /*   By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 18:08:46 by jcohen            #+#    #+#             */
-/*   Updated: 2024/07/27 01:16:26 by jcohen           ###   ########.fr       */
+/*   Updated: 2024/08/06 16:51:44 by jcohen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ void	draw_tile(t_game *game, void *img, int x, int y)
 
 static void	draw_tile_by_type(t_game *game, int i, int j)
 {
-	draw_tile(game, game->floor.img, j, i);
+	if (game->map.map[i][j] == FLOOR)
+		draw_tile(game, game->floor.img, j, i);
 	if (game->map.map[i][j] == WALL)
 		draw_tile(game, game->wall.img, j, i);
 	else if (game->map.map[i][j] == COLLECTIBLE)
