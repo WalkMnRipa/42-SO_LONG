@@ -6,7 +6,7 @@
 /*   By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 18:08:44 by jcohen            #+#    #+#             */
-/*   Updated: 2024/08/05 14:56:12 by jcohen           ###   ########.fr       */
+/*   Updated: 2024/08/08 19:42:27 by jcohen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,21 @@ static int	init_and_load(t_game *game, char *map_file)
 
 static void	setup_hooks(t_game *game)
 {
-	mlx_key_hook(game->win, key_press, game);
+	mlx_hook(game->win, KeyPress, KeyPressMask, key_press, game);
 	mlx_hook(game->win, 17, 1L << 17, exit_game, game);
 	mlx_loop_hook(game->mlx, game_loop, game);
+}
+
+static int	check_file_extension(const char *filename)
+{
+	size_t	len;
+
+	if (filename[0] == '.')
+		return (0);
+	len = ft_strlen(filename);
+	if (len <= 4)
+		return (0);
+	return (ft_strncmp(filename + len - 4, ".ber", 4) == 0);
 }
 
 int	main(int argc, char **argv)
@@ -51,6 +63,11 @@ int	main(int argc, char **argv)
 	{
 		ft_printf("Error\nUsage: ./so_long <map_file.ber>\n");
 		return (0);
+	}
+	if (!check_file_extension(argv[1]))
+	{
+		ft_printf("Error\nMap file must have .ber extension\n");
+		return (1);
 	}
 	ft_memset(&game, 0, sizeof(t_game));
 	if (!init_and_load(&game, argv[1]))
