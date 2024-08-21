@@ -6,7 +6,7 @@
 /*   By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 18:08:43 by jcohen            #+#    #+#             */
-/*   Updated: 2024/08/07 14:27:23 by jcohen           ###   ########.fr       */
+/*   Updated: 2024/08/21 15:28:24 by jcohen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,8 @@ int	load_images(t_game *game)
 		|| !game->exit.img || !game->enemy_img.img || !load_player_images(game))
 	{
 		ft_printf("Error: Failed to load images\n");
-		return (0);
+		ft_cleanup(game);
+		exit(1);
 	}
 	return (1);
 }

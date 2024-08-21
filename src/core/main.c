@@ -6,7 +6,7 @@
 /*   By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 18:08:44 by jcohen            #+#    #+#             */
-/*   Updated: 2024/08/08 19:42:27 by jcohen           ###   ########.fr       */
+/*   Updated: 2024/08/11 18:07:34 by jcohen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static int	init_and_load(t_game *game, char *map_file)
 
 static void	setup_hooks(t_game *game)
 {
-	mlx_hook(game->win, KeyPress, KeyPressMask, key_press, game);
+	mlx_key_hook(game->win, key_press, game);
 	mlx_hook(game->win, 17, 1L << 17, exit_game, game);
 	mlx_loop_hook(game->mlx, game_loop, game);
 }
@@ -62,11 +62,11 @@ int	main(int argc, char **argv)
 	if (argc != 2)
 	{
 		ft_printf("Error\nUsage: ./so_long <map_file.ber>\n");
-		return (0);
+		return (1);
 	}
 	if (!check_file_extension(argv[1]))
 	{
-		ft_printf("Error\nMap file must have .ber extension\n");
+		ft_printf("Error: Map file must have .ber extension\n");
 		return (1);
 	}
 	ft_memset(&game, 0, sizeof(t_game));

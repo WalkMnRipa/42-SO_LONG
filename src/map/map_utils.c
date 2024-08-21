@@ -6,7 +6,7 @@
 /*   By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 17:33:58 by jcohen            #+#    #+#             */
-/*   Updated: 2024/08/07 18:09:40 by jcohen           ###   ########.fr       */
+/*   Updated: 2024/07/17 21:27:32 by jcohen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,20 +69,10 @@ void	ft_count_map_elements(t_game *game, int i, int j)
 
 int	ft_validate_map_dimensions(t_game *game)
 {
-	int	screen_width;
-	int	screen_height;
-
 	if (game->map.rows <= 0 || game->map.columns <= 0)
 	{
 		ft_printf("Error: Invalid map dimensions (rows %d, columns: %d)\n",
 			game->map.rows, game->map.columns);
-		return (0);
-	}
-	mlx_get_screen_size(game->mlx, &screen_width, &screen_height);
-	if (game->map.columns * TILE_SIZE > screen_width || game->map.rows
-		* TILE_SIZE > screen_height)
-	{
-		ft_printf("Error: Map is too large for the screen)\n");
 		return (0);
 	}
 	return (1);

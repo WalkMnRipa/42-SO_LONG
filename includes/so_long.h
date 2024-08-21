@@ -6,7 +6,7 @@
 /*   By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 00:21:18 by jcohen            #+#    #+#             */
-/*   Updated: 2024/08/08 17:23:39 by jcohen           ###   ########.fr       */
+/*   Updated: 2024/08/11 18:10:44 by jcohen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,6 @@
 # include "../libft/get_next_line.h"
 # include "../libft/libft.h"
 # include "../minilibx-linux/mlx.h"
-# include "../minilibx-linux/mlx_int.h"
-# include <X11/X.h>
-# include <X11/keysym.h>
 # include <errno.h>
 # include <fcntl.h>
 # include <stdbool.h>
@@ -36,7 +33,7 @@
 # define PLAYER_BACK 1
 # define PLAYER_LEFT 2
 # define PLAYER_RIGHT 3
-# define SPEED_MOVEMENT_ENEMY 600
+# define SPEED_MOVEMENT_ENEMY 70
 # define FRAMES_PER_ANIMATION 40
 # define WALL '1'
 # define PLAYER 'P'
