@@ -6,7 +6,7 @@
 /*   By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 18:08:44 by jcohen            #+#    #+#             */
-/*   Updated: 2024/08/11 18:07:34 by jcohen           ###   ########.fr       */
+/*   Updated: 2024/08/24 21:07:23 by jcohen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	init_and_load(t_game *game, char *map_file)
 		ft_cleanup(game);
 		return (0);
 	}
-	if (!init_game(game) || !load_images(game))
+	if (!load_images(game) || !init_game(game))
 	{
 		ft_cleanup(game);
 		return (0);
