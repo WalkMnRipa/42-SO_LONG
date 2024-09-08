@@ -6,9 +6,16 @@
 #    By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/28 23:47:56 by jcohen            #+#    #+#              #
-#    Updated: 2024/07/26 22:32:10 by jcohen           ###   ########.fr        #
+#    Updated: 2024/09/08 17:58:30 by jcohen           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+# Couleurs
+GREEN = \033[0;32m
+YELLOW = \033[0;33m
+BLUE = \033[0;34m
+RED = \033[0;31m
+RESET = \033[0m
 
 NAME = so_long
 CC = cc
@@ -24,40 +31,60 @@ GRAPHICS_DIR = $(SRC_DIR)/graphics
 SRCS = $(CORE_DIR)/main.c $(CORE_DIR)/init.c $(CORE_DIR)/cleanup.c \
        $(GAME_DIR)/game_logic.c $(GAME_DIR)/player_movement.c \
        $(MAP_DIR)/map_loader.c $(MAP_DIR)/map_validator.c $(MAP_DIR)/map_utils.c \
-	   $(MAP_DIR)/map_flood_fill.c $(MAP_DIR)/map_copy.c \
+       $(MAP_DIR)/map_flood_fill.c $(MAP_DIR)/map_copy.c \
        $(GRAPHICS_DIR)/render.c $(GRAPHICS_DIR)/render_enemy.c \
-	   $(GAME_DIR)/enemy_movement.c $(GAME_DIR)/enemy_init.c \
+       $(GAME_DIR)/enemy_movement.c $(GAME_DIR)/enemy_init.c
 
 OBJS_DIR = objs
 OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJS_DIR)/%.o)
 
-LIBFT = libft/libft.a
-MLX = minilibx-linux/libmlx.a
-
 all: $(NAME)
 
-$(NAME): $(OBJS) $(LIBFT) $(MLX)
-	$(CC) $(CFLAGS) $(OBJS) -L./libft -lft -L./minilibx-linux $(MLXFLAGS) -o $(NAME)
+$(NAME): compile_libft compile_mlx compile_project link_project
+	@echo "$(GREEN)Build complete!$(RESET)"
+
+compile_libft:
+	@echo -n "$(YELLOW)Compiling libft... $(RESET)"
+	@make -C libft > /dev/null 2>&1
+	@for i in {1..10}; do echo -n "$(BLUE)█$(RESET)"; sleep 0.1; done
+	@echo "$(GREEN) Done!$(RESET)"
+
+compile_mlx:
+	@echo -n "$(YELLOW)Compiling MLX... $(RESET)"
+	@make -C minilibx-linux > /dev/null 2>&1
+	@for i in {1..10}; do echo -n "$(BLUE)█$(RESET)"; sleep 0.1; done
+	@echo "$(GREEN) Done!$(RESET)"
+
+compile_project: $(OBJS)
+	@echo "$(GREEN)Project files compiled!$(RESET)"
 
 $(OBJS_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(@D)
-	$(CC) $(CFLAGS) -I./includes -I./libft -I./minilibx-linux -c $< -o $@
+	@echo -n "$(YELLOW)Compiling $<... $(RESET)"
+	@$(CC) $(CFLAGS) -c $< -o $@ -I./includes -I./libft -I./minilibx-linux
+	@echo "$(GREEN)Done!$(RESET)"
 
-$(LIBFT):
-	make -C libft
-
-$(MLX):
-	make -C minilibx-linux
+link_project:
+	@echo -n "$(YELLOW)Linking project... $(RESET)"
+	@$(CC) $(CFLAGS) $(OBJS) -L./libft -lft -L./minilibx-linux $(MLXFLAGS) -o $(NAME) > /dev/null 2>&1
+	@for i in {1..10}; do echo -n "$(BLUE)█$(RESET)"; sleep 0.1; done
+	@echo "$(GREEN) Done!$(RESET)"
 
 clean:
-	make -C libft clean
-	make -C minilibx-linux clean
-	rm -rf $(OBJS_DIR)
+	@echo -n "$(YELLOW)Cleaning up... $(RESET)"
+	@make -C libft clean > /dev/null 2>&1
+	@make -C minilibx-linux clean > /dev/null 2>&1
+	@rm -rf $(OBJS_DIR)
+	@for i in {1..10}; do echo -n "$(BLUE)█$(RESET)"; sleep 0.05; done
+	@echo "$(GREEN) Done!$(RESET)"
 
 fclean: clean
-	make -C libft fclean
-	rm -f $(NAME)
+	@echo -n "$(YELLOW)Full cleanup... $(RESET)"
+	@make -C libft fclean > /dev/null 2>&1
+	@rm -f $(NAME)
+	@for i in {1..10}; do echo -n "$(BLUE)█$(RESET)"; sleep 0.05; done
+	@echo "$(GREEN) Done!$(RESET)"
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re compile_libft compile_mlx compile_project link_project
