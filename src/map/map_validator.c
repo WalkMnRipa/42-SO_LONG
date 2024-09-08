@@ -6,7 +6,7 @@
 /*   By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 17:33:30 by jcohen            #+#    #+#             */
-/*   Updated: 2024/07/27 01:14:25 by jcohen           ###   ########.fr       */
+/*   Updated: 2024/09/08 16:25:37 by jcohen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,11 +72,12 @@ static int	ft_check_required_elements(t_game *game)
 		while (++j < game->map.columns)
 			ft_count_map_elements(game, i, j);
 	}
-	if (game->map.player.x == -1 || game->map.exit.x == 0
+	if (game->map.player_count != 1 || game->map.exit_count != 1
 		|| game->map.collectibles == 0)
 	{
 		ft_printf("Error: Invalid number of elements (P: %d, E: %d, C: %d)\n",
-			game->map.player.x, game->map.exit.x, game->map.collectibles);
+			game->map.player_count, game->map.exit_count,
+			game->map.collectibles);
 		return (0);
 	}
 	return (1);

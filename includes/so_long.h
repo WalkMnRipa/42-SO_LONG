@@ -6,7 +6,7 @@
 /*   By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 00:21:18 by jcohen            #+#    #+#             */
-/*   Updated: 2024/08/11 18:10:44 by jcohen           ###   ########.fr       */
+/*   Updated: 2024/09/08 16:28:19 by jcohen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ typedef struct s_map
 	int			columns;
 	t_position	player;
 	t_position	exit;
+	int			exit_count;
+	int			player_count;
 	int			collectibles;
 }				t_map;
 

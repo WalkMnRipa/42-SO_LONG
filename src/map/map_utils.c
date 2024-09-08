@@ -6,7 +6,7 @@
 /*   By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 17:33:58 by jcohen            #+#    #+#             */
-/*   Updated: 2024/07/17 21:27:32 by jcohen           ###   ########.fr       */
+/*   Updated: 2024/09/08 16:20:35 by jcohen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,13 @@ void	ft_count_map_elements(t_game *game, int i, int j)
 		game->map.collectibles++;
 	else if (game->map.map[i][j] == PLAYER)
 	{
+		game->map.player_count++;
 		game->map.player.x = j;
 		game->map.player.y = i;
 	}
 	else if (game->map.map[i][j] == EXIT)
 	{
+		game->map.exit_count++;
 		game->map.exit.x = j;
 		game->map.exit.y = i;
 	}
