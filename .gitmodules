@@ -1,0 +1,6 @@
+[submodule "minilibx-linux"]
+	path = minilibx-linux
+	url = https://github.com/42Paris/minilibx-linux.git
+[submodule "42-LIBFT"]
+	path = 42-LIBFT
+	url = https://github.com/WalkMnRipa/42-LIBFT.git
