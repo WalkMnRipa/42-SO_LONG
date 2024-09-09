@@ -6,7 +6,7 @@
 /*   By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 17:33:01 by jcohen            #+#    #+#             */
-/*   Updated: 2024/07/17 20:47:41 by jcohen           ###   ########.fr       */
+/*   Updated: 2024/09/09 16:27:15 by jcohen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,5 +79,12 @@ int	load_map(t_game *game, char *filename)
 		return (0);
 	game->map.columns = (int)ft_strlen(game->map.map[0]);
 	game->map.rows = lines_read;
+	if (game->map.rows > MAX_HEIGHT / TILE_SIZE || game->map.columns > MAX_WIDTH
+		/ TILE_SIZE)
+	{
+		ft_printf("Error: Map is too big\n");
+		close(fd);
+		return (0);
+	}
 	return (1);
 }
