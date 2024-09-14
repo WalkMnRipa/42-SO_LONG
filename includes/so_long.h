@@ -6,7 +6,7 @@
 /*   By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 00:21:18 by jcohen            #+#    #+#             */
-/*   Updated: 2024/09/08 16:28:19 by jcohen           ###   ########.fr       */
+/*   Updated: 2024/09/14 02:45:23 by jcohen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 # define PLAYER_BACK 1
 # define PLAYER_LEFT 2
 # define PLAYER_RIGHT 3
-# define SPEED_MOVEMENT_ENEMY 70
+# define SPEED_MOVEMENT_ENEMY 50
 # define FRAMES_PER_ANIMATION 40
 # define WALL '1'
 # define PLAYER 'P'
