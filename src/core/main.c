@@ -6,7 +6,7 @@
 /*   By: jcohen <jcohen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 18:08:44 by jcohen            #+#    #+#             */
-/*   Updated: 2024/08/24 21:07:23 by jcohen           ###   ########.fr       */
+/*   Updated: 2024/09/20 15:30:33 by jcohen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ static int	check_file_extension(const char *filename)
 		return (0);
 	len = ft_strlen(filename);
 	if (len <= 4)
+		return (0);
+	if (filename[len - 4] == '.')
 		return (0);
 	return (ft_strncmp(filename + len - 4, ".ber", 4) == 0);
 }
